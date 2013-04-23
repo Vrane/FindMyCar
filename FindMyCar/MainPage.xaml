@@ -1,0 +1,138 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="FindMyCar.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
+    mc:Ignorable="d"
+    d:DesignWidth="480"
+    d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"
+    Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <Style
+            TargetType="Maps:Pushpin"
+            x:Key="PushpinStyle">
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate
+                        TargetType="Maps:Pushpin">
+                        <Image
+                            Source="Images/MapPin.png"
+                            Stretch="None" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Background"
+                Value="Black" />
+            <Setter
+                Property="Foreground"
+                Value="White" />
+            <Setter
+                Property="FontSize"
+                Value="18" />
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid
+        x:Name="LayoutRoot"
+        Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel
+            x:Name="TitlePanel"
+            Grid.Row="0"
+            Margin="12,17,0,28">
+            <TextBlock
+                x:Name="ApplicationTitle"
+                Text="MY APPLICATION"
+                Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBlock
+                x:Name="PageTitle"
+                Text="page name"
+                Margin="9,-7,0,0"
+                Style="{StaticResource PhoneTextTitle1Style}" />
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid
+            x:Name="ContentPanel"
+            Grid.Row="1"
+            Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="100" />
+                <RowDefinition
+                    Height="*" />
+            </Grid.RowDefinitions>
+            <!--<Button
+                x:Name="startLocationButton"
+                Grid.Row="0"
+                Content="Get Current Location"
+                Click="ButtonStartLocationClick" />-->
+            <Maps:Map
+                ZoomBarVisibility="Visible"
+                ZoomLevel="12"
+                CredentialsProvider="Au6E8XvjZvj9qHHGV5ap9YqrUsWIZ8OnF4N2d7n6m0zkZ2yENhqVeljL7igeqBeE"
+                x:Name="map"
+                Grid.RowSpan="2" />
+            <TextBox
+                Visibility="Collapsed"
+                x:Name="TextBoxForLocation"></TextBox>
+            <TextBox
+                Visibility="Collapsed"
+                x:Name="TextBoxForNewLocation"></TextBox>
+        </Grid>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar
+            Mode="Default"
+            Opacity="1.0"
+            IsMenuEnabled="True"
+            IsVisible="True">
+
+            <shell:ApplicationBarIconButton
+                Text="Get current _location"
+                IconUri="Images/normal.done.png"
+                Click="LocateApplicationBarIconButtonOnClick" />
+            <shell:ApplicationBarIconButton
+                Text="Save _location"
+                IconUri="Images/appbar.save.png"
+                Click="SaveApplicationBarIconButtonOnClick" />
+            <shell:ApplicationBarIconButton
+                Text="Find my new _location"
+                IconUri="Images/appbar.color.png"
+                Click="FindNewLocationApplicationBarIconButtonOnClick" />
+            <shell:ApplicationBarIconButton
+                Text="Find my car"
+                IconUri="Images/appbar.command.png"
+                Click="FindMyCarApplicationBarIconButtonOnClick" />
+
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    Text="menu item 1"
+                    x:Name="menuItem1" />
+                <shell:ApplicationBarMenuItem
+                    Text="menu item 2"
+                    x:Name="menuItem2" />
+            </shell:ApplicationBar.MenuItems>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
