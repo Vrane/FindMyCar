@@ -16,7 +16,7 @@
     public partial class MainPage : PhoneApplicationPage
     {
         // This is the global internal variable where results are stored. These are accessed later to calculate the route.
-        internal geocodeservice.GeocodeResult[] _geocodeResults;
+        internal geocodeservice.GeocodeResult[] GeocodeResults;
 
         private Location _location = new Location();
 
@@ -144,7 +144,7 @@
 
         private void FindMyCarApplicationBarIconButtonOnClick(object sender, EventArgs e)
         {
-            this._geocodeResults = new geocodeservice.GeocodeResult[2];
+            this.GeocodeResults = new geocodeservice.GeocodeResult[2];
 
             this.Geocode(this.TextBoxForLocation.Text, 0);
             var myNewSavedLocation = this._newGeoCoordinateWatcher.Position.Location;
@@ -194,14 +194,14 @@
 
             // Retrieve the GeocodeResult for this response and store it in the global variable geocodeResults, using
             //   the waypoint index to position it in the array.
-            this._geocodeResults[waypointIndex] = e.Result.Results[0];
+            this.GeocodeResults[waypointIndex] = e.Result.Results[0];
 
             // Look at each element in the global gecodeResults array to figure out if more geocode responses still 
             //   need to be returned.
 
             bool doneGeocoding = true;
 
-            foreach (geocodeservice.GeocodeResult gr in this._geocodeResults)
+            foreach (geocodeservice.GeocodeResult gr in this.GeocodeResults)
             {
                 if (gr == null)
                 {
@@ -210,7 +210,7 @@
             }
 
             // If the geocodeResults array is totally filled, then calculate the route.
-            if (doneGeocoding) CalculateRoute(this._geocodeResults);
+            if (doneGeocoding) CalculateRoute(this.GeocodeResults);
         }
 
         private void CalculateRoute(geocodeservice.GeocodeResult[] results)
@@ -346,7 +346,7 @@
                 }
 
                 // For each geocode result (which are the waypoints of the route), draw a dot on the map.
-                foreach (geocodeservice.GeocodeResult gr in this._geocodeResults)
+                foreach (geocodeservice.GeocodeResult gr in this.GeocodeResults)
                 {
                     Ellipse point = new Ellipse();
                     point.Width = 10;
